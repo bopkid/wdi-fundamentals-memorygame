@@ -40,21 +40,28 @@ function checkForMatch(){
     }
 }
 
-
-function flipCard(cardId){
-
-
-    console.log('User flipped ' +cards[cardId].rank);
-    
+function flipCard(e){
+    let cardId =e.getAttribute("data-id");
     cardsInPlay.push(cards[cardId].rank);
-
+    
     checkForMatch();
+    e.setAttribute(cards[cardId].cardImage);
+    
+}
+
+function createBorad(){
+    for(let i= 0; i < cards.length; i++)
+    {
+        let cardElement = document.createElement('img');
+        cardElement.setAttribute('src', '../images/back.png');
+        cardElement.setAttribute('data-id', i);
+        cardElement.addEventListener('click', flipCard(this));
+        document.getElementById('game').append(cardElement);
+
+    }
+ 
+  
 }
 
 
-flipCard(0);
-console.log(cards[0].cardImage);
-console.log(cards[0].suit);    
-flipCard(2);
-console.log(cards[2].cardImage);
-console.log(cards[2].suit); 
+console.log(createBorad());
