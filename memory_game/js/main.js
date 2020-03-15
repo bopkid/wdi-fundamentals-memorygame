@@ -45,8 +45,9 @@ function flipCard(e){
 
     const cardId = e.id;
     e.setAttribute('src',cards[cardId].cardImage);
-    checkForMatch();
+    
     cardsInPlay.push(cards[cardId]);
+    checkForMatch();
 
 }
 
