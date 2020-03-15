@@ -2,25 +2,25 @@
 let cards = [{
     rank:"queen",
     suit:"hearts",
-    cardImage:'images/queen-of-hearts.png'
+    cardImage:'../images/queen-of-hearts.png'
 },
 
 {
     rank:"queen",
     suit:"diamonds",
-    cardImage:"images/queen-of-diamonds.png"
+    cardImage:"../images/queen-of-diamonds.png"
 },
 
 {
     rank:"king",
     suit:"hearts",
-    cardImage:'images/king-of-hearts.png'
+    cardImage:'../images/king-of-hearts.png'
 },
 
 {
     rank:"king",
     suit:"diamonds",
-    cardImage:'images/king-of-diamonds.png'
+    cardImage:'../images/king-of-diamonds.png'
 },
 
 ];
@@ -31,7 +31,8 @@ let cardsInPlay = [];
 function checkForMatch(){
         
     if(cardsInPlay.length === 2){
-        if(cardsInPlay[0] === cardsInPlay[1]){
+       
+        if(cardsInPlay[0].rank === cardsInPlay[1].rank){
             alert("You found a match!");
         }
         else{
@@ -41,25 +42,28 @@ function checkForMatch(){
 }
 
 function flipCard(e){
-    let cardId =e.getAttribute("data-id");
-    cardsInPlay.push(cards[cardId].rank);
-    
+
+    const cardId = e.id;
+    e.setAttribute('src',cards[cardId].cardImage);
     checkForMatch();
-    e.setAttribute(cards[cardId].cardImage);
-    
+    cardsInPlay.push(cards[cardId]);
+
 }
 
 function createBorad(){
+    
     for(let i= 0; i < cards.length; i++)
     {
-        let cardElement = document.createElement('img');
+        const cardElement = document.createElement('img');
         cardElement.setAttribute('src', '../images/back.png');
-        cardElement.setAttribute('data-id', i);
-        cardElement.addEventListener('click', flipCard(this));
+        cardElement.setAttribute('id', i);
         document.getElementById('game').append(cardElement);
-
+        cardElement.addEventListener("click",function (){flipCard(cardElement)});
+        
     }
- 
+    
+    
+    
   
 }
 
